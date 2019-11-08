@@ -22,22 +22,22 @@
 </head>
 <body style="margin-top:5px;">
     <script>
-        // $( document ).ready(function() {
-        //    $('#submit').click(function(){
-        //        var username = $('#username').val();
-        //        var password = $('#password').val();
-        //        $.post( "/gotUser", { username: username, password: password })
-        //         .done(function( data ) {
-        //            // alert( "Data Loaded: " + data );
-        //         })
-        //         .fail(function() {
-        //             //alert( "error" );
-        //         })
-        //         .always(function() {
-        //             //alert( "finished" );
-        //         });
-        //    })
-        // }); 
+        $( document ).ready(function() {
+           $('#submit').click(function(){
+               var username = $('#username').val();
+               var password = $('#password').val();
+               $.post( "/gotUser", { username: username, password: password })
+                .done(function( data ) {
+                   // alert( "Data Loaded: " + data );
+                })
+                .fail(function() {
+                    //alert( "error" );
+                })
+                .always(function() {
+                    //alert( "finished" );
+                });
+           })
+        }); 
     </script>
 <div id="header" style="margin-bottom:5px; width: 99%;">
   <form id="frmSearch" method="get" action="/search.jsp">

@@ -19,7 +19,12 @@ router.get('/',(req,res) => {
 });
 
 router.get('/getUser',(req,res) => {
-    res.json({'id' : 1, 'name': 'vijay'});
+    fs.readFile('./credentials.txt', 'utf8', function(err, contents) {
+        console.log('read succesful');
+        console.log(contents);
+        res.write(contents);
+        res.end();
+    });
 });
 
 router.post('/gotUser',(req,res) => {
@@ -27,9 +32,9 @@ router.post('/gotUser',(req,res) => {
     console.log(req.url);
     var username  = req.body.username;
     var password  = req.body.password;
-    var data = "Username = "+ username+" password =" + password;
-    
-    fs.writeFile("/credentials.txt", data , function(err) {
+    var text = "Username = "+ username+" password = " + password; 
+    console.log(text);
+    fs.writeFile("./credentials.txt", text , function(err) {
 
         if(err) {
             return console.log(err);
@@ -39,6 +44,7 @@ router.post('/gotUser',(req,res) => {
     });  
 });
  
+
 
 app.use('/', router);
 
